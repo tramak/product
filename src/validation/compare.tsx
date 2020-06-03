@@ -1,0 +1,1 @@
+export const compare = (match, textError = 'Must match') => value => (match === value ? undefined : textError);

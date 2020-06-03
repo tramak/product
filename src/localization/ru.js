@@ -6,4 +6,6 @@ export default {
   'Forgot password?': 'Забыли пароль?',
   'No account? sing up': 'Зарегистрироваться',
   'Sing up': 'Зарегистрироваться',
+  'Аlready have an account? Login': 'Уже есть аккаунт? Войти',
+  'Repeat password': 'Повторить пароль'
 };
