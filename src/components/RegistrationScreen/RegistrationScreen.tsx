@@ -20,10 +20,11 @@ const RegistrationScreen = ({ navigation }) => {
       <View style={styles.content}>
         <Form
           onSubmit={onSubmit}
+          validate={values => ({
+            passwordRepeat: compare(values.password)(values.passwordRepeat)
+          })}
         >
-          {(props) => {
-            const {form, valid} = props;
-            const { values } = form.getState();
+          {({form, valid}) => {
 
             return (
               <View>
@@ -55,7 +56,7 @@ const RegistrationScreen = ({ navigation }) => {
                     name="passwordRepeat"
                     component={BlockIconInput}
                     placeholder={l('Repeat password')}
-                    validate={composeValidators(required(), compare(values.password))}
+                    validate={required()}
                     secureTextEntry
                   />
 
