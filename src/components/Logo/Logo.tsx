@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, Text, View, StyleSheet } from "react-native";
-import l from 'src/localization/l';
-import { MAIN_COLOR } from "src/themes/base";
+import l from 'src/screen/LoginScreen/node_modules/src/localization/l';
+import { MAIN_COLOR } from "src/themes/color";
 
 const Logo = () => {
   return (

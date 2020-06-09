@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { ERROR_COLOR, MAIN_COLOR } from "src/themes/base";
+import { ERROR_COLOR, MAIN_COLOR } from "src/themes/color";
 
 const BlockIconInput = ({
   input,
