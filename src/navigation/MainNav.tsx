@@ -8,18 +8,18 @@ const Stack = createStackNavigator();
 
 const MainNav = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Main" screenOptions={{ headerShown: true }}>
-        <Stack.Screen
-          name={'Main'}
-          component={MainScreen}
-          options={(navigation) => ({
-            title: 'Все продукты 1',
-            headerLeft: () => <HeaderLeftMenu toggleDrawer={navigation.toggleDrawer} />
-          })}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator initialRouteName="Main" screenOptions={{ headerShown: true }}>
+      <Stack.Screen
+        name={'Main'}
+        component={MainScreen}
+        options={({ navigation }) => {
+          return {
+            title: 'Все продукты 2',
+              headerLeft: () => <HeaderLeftMenu toggleDrawer={navigation.toggleDrawer} />
+          }
+        }}
+      />
+    </Stack.Navigator>
   )
 };
 

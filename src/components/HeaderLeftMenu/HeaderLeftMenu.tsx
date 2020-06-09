@@ -4,7 +4,7 @@ import { MENU_COLOR } from 'src/themes/color';
 
 const HeaderLeftMenu = ({ toggleDrawer }) => {
     return (
-        <Entypo name="menu" size={24} color={MENU_COLOR} />
+        <Entypo name="menu" size={24} color={MENU_COLOR} onPress={toggleDrawer} />
     )
 };
 
