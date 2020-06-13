@@ -6,7 +6,7 @@ import MenuNav from "src/navigation/MenuNav";
 
 export default function App() {
   return (
-    <MenuNav />
-    // <LoginNav />
+    // <MenuNav />
+    <LoginNav />
   );
 }

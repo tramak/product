@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, ActivityIndicator } from 'react-native';
 import { ERROR_COLOR, MAIN_COLOR } from "src/themes/color";
 
 const BlockIconInput = ({
@@ -28,6 +28,11 @@ const BlockIconInput = ({
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
       />
+      {meta.validating && (
+        <View style={styles.spinner}>
+          <ActivityIndicator size="small" color={MAIN_COLOR} />
+        </View>
+      )}
       {isError && (
         <View style={styles.errorBlock}>
           <Text style={styles.errorText}>{meta.error}</Text>
@@ -58,6 +63,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingBottom: 10,
     width: '100%',
+  },
+  spinner: {
+    position: 'absolute',
+    top: 10,
+    right: 10
   },
   errorBlock: {
     // backgroundColor: 'blue'

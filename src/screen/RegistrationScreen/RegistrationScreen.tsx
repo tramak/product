@@ -5,10 +5,22 @@ import {Field, Form} from "react-final-form";
 import BlockIconInput from "src/components/Form/BlockIconInput";
 import {FontAwesome} from "@expo/vector-icons";
 import {MAIN_COLOR} from "src/themes/color";
-import l from 'src/screen/LoginScreen/node_modules/src/localization/l';
-import { required } from 'src/validation/required';
-import { compare } from "src/validation/compare";
+import l from 'src/localization/l';
+import {required} from 'src/validation/required';
+import {compare} from "src/validation/compare";
 import {composeValidators} from "src/validation/composeValidators";
+import {asyncMemoize} from "src/validation/asyncMemoize";
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const usernameAvailable = asyncMemoize(async value => {
+  await sleep(400);
+  if (
+    ~["john", "paul", "george", "ringo"].indexOf(value && value.toLowerCase())
+  ) {
+    return "Username taken!";
+  }
+});
 
 const RegistrationScreen = ({ navigation }) => {
   const onSubmit = (values) => {
@@ -34,6 +46,7 @@ const RegistrationScreen = ({ navigation }) => {
                     name="name"
                     component={BlockIconInput}
                     placeholder={l('Name')}
+                    validate={composeValidators(required(), usernameAvailable)}
                     icon={(color) => <FontAwesome name="user" size={24} color={color} />}
                   />
                   <Field

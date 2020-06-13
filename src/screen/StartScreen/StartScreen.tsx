@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Button } from "react-native";
 import Logo from "src/components/Logo/Logo";
-import l from 'src/screen/LoginScreen/node_modules/src/localization/l';
+import l from 'src/localization/l';
 import {MAIN_COLOR} from "src/themes/color";
 
 const StartScreen = ({ navigation }) => {
