@@ -1,0 +1,4 @@
+npm install http-server -g - установить локальный сервер
+http-server ./web-build/ --port=8081 - запустить локальный сервер
+
+expo build:web - сделать web сборку
