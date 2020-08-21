@@ -1,5 +1,5 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
-import * as REALTY from '../constants/realty';
+import * as PRODUCT from '../constants/product';
 
 function* loadRequest() {
   console.log('loadRequest');
@@ -10,6 +10,6 @@ function* saveData() {
 }
 
 export default function* () {
-  yield takeEvery(REALTY.LOAD_REQUEST, loadRequest);
-  yield takeEvery(REALTY.SAVE, saveData);
+  yield takeEvery(PRODUCT.LOAD_REQUEST, loadRequest);
+  yield takeEvery(PRODUCT.SAVE, saveData);
 }

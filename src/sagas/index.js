@@ -1,9 +1,9 @@
 import { all } from "redux-saga/effects";
 
-import realty from "./realty";
+import product from "./product";
 
 export default function* sagas() {
   yield all([
-    realty(),
+    product(),
   ]);
 }

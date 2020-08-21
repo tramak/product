@@ -1,0 +1,5 @@
+export const LOAD_ERROR = '@PRODUCT/LOAD_ERROR';
+export const LOAD_REQUEST = '@PRODUCT/LOAD_REQUEST';
+export const LOAD_SUCCESS = '@PRODUCT/LOAD_SUCCESS';
+export const SAVE = '@PRODUCT/SAVE';
+export const STOP_SAVE = '@PRODUCT/STOP_SAVE';

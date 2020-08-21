@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 
 import combinedReducer from "../reducers";
@@ -17,8 +17,6 @@ function configureStore(initialState) {
 
   return createStore(
     combinedReducer,
-    // eslint-disable-next-line more/no-window
-
     enhancer
   );
 }

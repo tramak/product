@@ -6,33 +6,35 @@ import l from 'src/localization/l';
 import Logo from "src/components/Logo/Logo";
 import { MAIN_COLOR } from "src/themes/color";
 import BlockIconInput from "src/components/Form/BlockIconInput";
+import postData from "src/utils/postData";
 
 const LoginScreen = ({ navigation }) => {
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     console.log({values});
+    postData('/login', values);
 
-    fetch('https://kalael-viktor.herokuapp.com/v1/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({query: `
-        mutation {
-              insert_user_one(
-                object: {
-                    password: "1234",
-                    phone: "89892621552"
-                }
-              ) {
-                    user_id
-                }
-            }
-      `})
-    })
-      .then(r => r.json())
-      .then(data => console.log('data returned:', data));
-      };
+    // fetch('https://kalael-viktor.herokuapp.com/v1/graphql', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    //   },
+    //   body: JSON.stringify({query: `
+    //     mutation {
+    //           insert_user_one(
+    //             object: {
+    //                 password: "1234",
+    //                 phone: "89892621552"
+    //             }
+    //           ) {
+    //                 user_id
+    //             }
+    //         }
+    //   `})
+    // })
+    //   .then(r => r.json())
+    //   .then(data => console.log('data returned:', data));
+  };
 
   return (
     <ScrollView contentContainerStyle={{flexGrow:1}}>
