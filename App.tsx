@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { Provider } from 'react-redux';
 // import { AsyncStorage } from 'react-native';
 // import { ApolloProvider } from 'react-apollo';
 // import { StyleSheet, Text, View } from 'react-native';
 import LoginNav from "src/navigation/LoginNav";
-import { Provider } from "react-redux";
-import store from 'src/store/index.js';
+import store from 'src/store';
 // import MainNav from "src/navigation/MainNav";
 // import MenuNav from "src/navigation/MenuNav";
 // import makeApolloClient from "src/apollo";
 // import CenterSpinner from "src/components/CenterSpinner/CenterSpinner";
 
-export default function App() {
+const App: React.FC = () => {
   // const [client, setClient] = useState(null);
 
   // const fetchSession = async () => {
@@ -37,4 +37,6 @@ export default function App() {
       <LoginNav />
     </Provider>
   );
-}
+};
+
+export default App;

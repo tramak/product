@@ -1,17 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View, ActivityIndicator } from 'react-native';
 import { ERROR_COLOR, MAIN_COLOR } from "src/themes/color";
+import { FieldRenderProps } from "react-final-form";
 
-const BlockIconInput = ({
+type BlockIconInputProps = FieldRenderProps<string, any> & {
+  placeholder: string,
+  icon: (color: string) => React.FC | undefined,
+  keyboardType: string,
+  secureTextEntry: boolean
+};
+
+const BlockIconInput: React.FC<BlockIconInputProps> = ({
   input,
   meta,
   placeholder,
-  icon = null,
-  keyboardType = 'default',
+  icon,
+  keyboardType= 'default',
   secureTextEntry
 }) => {
-  const isError = meta.error && meta.modified;
-  const color = isError ? ERROR_COLOR : MAIN_COLOR;
+  const isError: boolean = meta.error && meta.modified;
+  const color: string = isError ? ERROR_COLOR : MAIN_COLOR;
 
   return (
     <View style={styles.block}>

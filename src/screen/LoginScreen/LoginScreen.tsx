@@ -7,8 +7,15 @@ import Logo from "src/components/Logo/Logo";
 import { MAIN_COLOR } from "src/themes/color";
 import BlockIconInput from "src/components/Form/BlockIconInput";
 import postData from "src/utils/postData";
+import { FormProps } from "react-final-form";
+import {ParamListBase} from "@react-navigation/native";
+import {StackNavigationProp} from "@react-navigation/stack/src/types";
 
-const LoginScreen = ({ navigation }) => {
+type LoginScreenProps = {
+  navigation: StackNavigationProp<ParamListBase>
+};
+
+const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const onSubmit = async (values) => {
     console.log({values});
     postData('/login', values);
@@ -41,21 +48,21 @@ const LoginScreen = ({ navigation }) => {
       <Form
         onSubmit={onSubmit}
       >
-        {(props) => {
+        {(props: FormProps) => {
           const {form, valid} = props;
   
           return (
             <View style={styles.content}>
               <View style={styles.formView}>
                 <Logo/>
-                <Field
+                <Field<string>
                   name="phone"
                   component={BlockIconInput}
                   placeholder={l('Phone')}
                   icon={(color) => <FontAwesome name="mobile" size={24} color={color} />}
                   keyboardType={'phone-pad'}
                 />
-                <Field
+                <Field<string>
                   name="password"
                   component={BlockIconInput}
                   placeholder={l('Password')}

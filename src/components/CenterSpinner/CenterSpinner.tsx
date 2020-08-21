@@ -5,7 +5,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-const CenterSpinner = () => (
+const CenterSpinner: React.FC = () => (
   <View style={styles.container}>
     <ActivityIndicator />
   </View>
