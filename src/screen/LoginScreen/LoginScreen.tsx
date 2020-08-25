@@ -7,7 +7,7 @@ import Logo from "src/components/Logo/Logo";
 import { MAIN_COLOR } from "src/themes/color";
 import BlockIconInput from "src/components/Form/BlockIconInput";
 import postData from "src/utils/postData";
-import { FormProps } from "react-final-form";
+import { FormProps, FormSpyRenderProps } from "react-final-form";
 import {ParamListBase} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack/src/types";
 
@@ -16,7 +16,7 @@ type LoginScreenProps = {
 };
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: object) => {
     console.log({values});
     postData('/login', values);
 
@@ -48,25 +48,25 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       <Form
         onSubmit={onSubmit}
       >
-        {(props: FormProps) => {
+        {(props: FormSpyRenderProps) => {
           const {form, valid} = props;
   
           return (
             <View style={styles.content}>
               <View style={styles.formView}>
                 <Logo/>
-                <Field<string>
+                <Field
                   name="phone"
                   component={BlockIconInput}
                   placeholder={l('Phone')}
-                  icon={(color) => <FontAwesome name="mobile" size={24} color={color} />}
+                  icon={(color: string) => <FontAwesome name="mobile" size={24} color={color} />}
                   keyboardType={'phone-pad'}
                 />
-                <Field<string>
+                <Field
                   name="password"
                   component={BlockIconInput}
                   placeholder={l('Password')}
-                  icon={(color) => <FontAwesome name="lock" size={24} color={color} />}
+                  icon={(color: string) => <FontAwesome name="lock" size={24} color={color} />}
                 />
   
                 <View style={styles.buttonWrap}>
