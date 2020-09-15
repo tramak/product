@@ -3,12 +3,12 @@ interface IProductState {
   isSaved: boolean
 }
 
-const initialState = {
+const defaultState = {
   products: [],
   isSaved: false, // true - идёт процесс сохранения
 };
 
-const product = (state: IProductState = initialState, action) => {
+const product = (state: IProductState = defaultState, action) => {
   return state;
 };
 

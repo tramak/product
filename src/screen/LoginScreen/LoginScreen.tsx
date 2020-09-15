@@ -2,45 +2,38 @@ import React from 'react';
 import {View, Text, TextInput, StyleSheet, Button, TouchableOpacity, ScrollView} from 'react-native';
 import { Form, Field } from 'react-final-form';
 import { FontAwesome } from '@expo/vector-icons';
+import {connect, ConnectedProps} from "react-redux";
 import l from 'src/localization/l';
 import Logo from "src/components/Logo/Logo";
 import { MAIN_COLOR } from "src/themes/color";
 import BlockIconInput from "src/components/Form/BlockIconInput";
 import postData from "src/utils/postData";
 import { FormProps } from "react-final-form";
-import {ParamListBase} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack/src/types";
+import { ParamListBase } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack/src/types";
+import { RootState } from "src/reducers";
+import { login } from 'src/actions/settings';
 
-type LoginScreenProps = {
-  navigation: StackNavigationProp<ParamListBase>
+const mapState = (state: RootState) => ({
+  state
+});
+
+const mapDispatch = {
+  login
 };
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+interface LoginScreenProps extends PropsFromRedux {
+  navigation: StackNavigationProp<ParamListBase>
+}
+
+const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, login }) => {
   const onSubmit = async (values) => {
     console.log({values});
-    postData('/login', values);
-
-    // fetch('https://kalael-viktor.herokuapp.com/v1/graphql', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    //   },
-    //   body: JSON.stringify({query: `
-    //     mutation {
-    //           insert_user_one(
-    //             object: {
-    //                 password: "1234",
-    //                 phone: "89892621552"
-    //             }
-    //           ) {
-    //                 user_id
-    //             }
-    //         }
-    //   `})
-    // })
-    //   .then(r => r.json())
-    //   .then(data => console.log('data returned:', data));
+    login(values)
+    // postData('/login', values);
   };
 
   return (
@@ -93,7 +86,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default connector(LoginScreen);
 
 const styles = StyleSheet.create({
   content: {

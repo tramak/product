@@ -7,10 +7,10 @@ import combinedReducer from "../reducers";
 import rootSaga from "../sagas";
 
 const middlewares = [];
-
+//
 const sagaMiddleware = createSagaMiddleware();
 
-function configureStore(initialState) {
+function configureStore() {
   const enhancer = composeWithDevTools(
     applyMiddleware(...middlewares, sagaMiddleware)
   );
@@ -24,5 +24,7 @@ function configureStore(initialState) {
 const store = configureStore();
 
 sagaMiddleware.run(rootSaga);
+
+// const store = createStore(combinedReducer, composeWithDevTools());
 
 export default store;
