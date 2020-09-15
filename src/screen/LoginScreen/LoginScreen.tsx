@@ -52,14 +52,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, login }) => {
                   name="phone"
                   component={BlockIconInput}
                   placeholder={l('Phone')}
-                  icon={(color) => <FontAwesome name="mobile" size={24} color={color} />}
+                  icon={(color: string) => <FontAwesome name="mobile" size={24} color={color} />}
                   keyboardType={'phone-pad'}
                 />
                 <Field<string>
                   name="password"
                   component={BlockIconInput}
                   placeholder={l('Password')}
-                  icon={(color) => <FontAwesome name="lock" size={24} color={color} />}
+                  icon={(color: string) => <FontAwesome name="lock" size={24} color={color} />}
                 />
   
                 <View style={styles.buttonWrap}>
