@@ -1,14 +1,18 @@
 import { handleActions } from "redux-actions";
+import { AnyAction } from "redux";
 
-import { login } from 'src/actions/settings';
-import { LOGIN } from "src/constants/settings";
+import { FETCH_REQUEST, FETCH_SUCCESS, FETCH_FAIL } from "src/constants/settings";
 
 interface ISettingsState {
   user: {
-    isGuest: boolean,
-  },
-  isLoad: boolean,
-  error: string
+    isGuest: boolean;
+    id?: number,
+    firstName?: string,
+    lastName?: string,
+    phone?: string
+  }
+  isLoad: boolean;
+  error: string;
 }
 
 const defaultState: ISettingsState = {
@@ -23,11 +27,31 @@ const defaultState: ISettingsState = {
 //   return state;
 // };
 
-console.log(123, { login: login() });
-export default handleActions<ISettingsState, string>({
-  [LOGIN]: (state, action) => {
-    console.log({ state, action });
-    return state;
+export default handleActions<ISettingsState, AnyAction>({
+  [FETCH_REQUEST]: (state) => {
+    return {
+      ...state,
+      isLoad: true
+    };
+  },
+  [FETCH_SUCCESS]: (state, action) => {
+    const { user } = action.payload;
+    return {
+      ...state,
+      user: {
+        ...user,
+        isGuest: false
+      }
+    };
+  },
+  [FETCH_FAIL]: (state, action) => {
+    const { error } = action.payload;
+
+    return {
+      ...state,
+      isLoad: false,
+      error
+    };
   }
 }, defaultState);
 

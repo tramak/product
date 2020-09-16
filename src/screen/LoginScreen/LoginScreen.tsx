@@ -31,8 +31,7 @@ interface LoginScreenProps extends PropsFromRedux {
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, login }) => {
   const onSubmit = async (values) => {
-    console.log({values});
-    login(values)
+    login(values);
     // postData('/login', values);
   };
 
