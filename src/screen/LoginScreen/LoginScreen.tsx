@@ -1,21 +1,23 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet, Button, TouchableOpacity, ScrollView} from 'react-native';
-import { Form, Field } from 'react-final-form';
+import {View, Text, StyleSheet, Button, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
+import { Form, Field, FormProps } from 'react-final-form';
 import { FontAwesome } from '@expo/vector-icons';
-import {connect, ConnectedProps} from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
+import { ParamListBase } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack/src/types";
+
+import config from 'src/config';
 import l from 'src/localization/l';
 import Logo from "src/components/Logo/Logo";
 import { MAIN_COLOR } from "src/themes/color";
 import BlockIconInput from "src/components/Form/BlockIconInput";
-import postData from "src/utils/postData";
-import { FormProps } from "react-final-form";
-import { ParamListBase } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack/src/types";
 import { RootState } from "src/reducers";
 import { login } from 'src/actions/settings';
+import { required } from "src/validation/required";
 
 const mapState = (state: RootState) => ({
-  state
+  isLoad: state.settings.isLoad,
+
 });
 
 const mapDispatch = {
@@ -29,16 +31,16 @@ interface LoginScreenProps extends PropsFromRedux {
   navigation: StackNavigationProp<ParamListBase>
 }
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, login }) => {
+const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, isLoad, login }) => {
   const onSubmit = async (values) => {
     login(values);
-    // postData('/login', values);
   };
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow:1}}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <Form
         onSubmit={onSubmit}
+        initialValues={config.login.initialValues}
       >
         {(props: FormProps) => {
           const {form, valid} = props;
@@ -47,27 +49,36 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation, login }) => {
             <View style={styles.content}>
               <View style={styles.formView}>
                 <Logo/>
-                <Field<string>
+                <Field
                   name="phone"
                   component={BlockIconInput}
                   placeholder={l('Phone')}
                   icon={(color: string) => <FontAwesome name="mobile" size={24} color={color} />}
-                  keyboardType={'phone-pad'}
+                  keyboardType="phone-pad"
+                  validate={required()}
                 />
-                <Field<string>
+                <Field
                   name="password"
                   component={BlockIconInput}
                   placeholder={l('Password')}
                   icon={(color: string) => <FontAwesome name="lock" size={24} color={color} />}
+                  secureTextEntry={true}
+                  validate={required()}
                 />
   
                 <View style={styles.buttonWrap}>
-                  <Button
-                    title={l('Login')}
-                    onPress={form.submit}
-                    color={MAIN_COLOR}
-                    disabled={!valid}
-                  />
+                  {
+                    isLoad
+                      ? <ActivityIndicator size="small" color="#0000ff" />
+                      : (
+                        <Button
+                          title={l('Login')}
+                          onPress={form.submit}
+                          color={MAIN_COLOR}
+                          disabled={!valid}
+                        />
+                      )
+                  }
                 </View>
   
                 <View style={styles.linkWrap}>
@@ -111,7 +122,8 @@ const styles = StyleSheet.create({
     padding: 40,
   },
   buttonWrap: {
-    marginTop: 10
+    marginTop: 10,
+    height: 36
   },
   linkWrap: {
     alignItems: 'center'
