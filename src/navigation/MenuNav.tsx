@@ -3,13 +3,9 @@ import {View, StyleSheet, AsyncStorage} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import MapScreen from "src/screen/MapScreen/MapScreen";
-import MainScreen from "src/screen/MainScreen/MainScreen";
 import MainNav from "src/navigation/MainNav";
 import ProfileScreen from "src/screen/ProfileScreen/ProfileScreen";
 import { AntDesign, Foundation } from '@expo/vector-icons';
-import makeApolloClient from "src/apollo";
-import CenterSpinner from "src/components/CenterSpinner/CenterSpinner";
-import {ApolloProvider} from "react-apollo";
 
 const Drawer = createDrawerNavigator();
 export default function MenuNav() {

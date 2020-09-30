@@ -1,6 +1,6 @@
 import { persistCombineReducers } from "redux-persist";
 import { AsyncStorage } from "react-native";
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 
 import product from "./product";
 import settings from "./settings";

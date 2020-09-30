@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { store, persistor } from 'src/store';
-import LoginNav from "src/navigation/LoginNav";
 import CenterSpinner from "src/components/CenterSpinner/CenterSpinner";
+import AppNav from "src/navigation/AppNav";
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={<CenterSpinner />} persistor={persistor}>
-        <LoginNav />
+        <AppNav />
       </PersistGate>
     </Provider>
   );
