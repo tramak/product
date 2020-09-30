@@ -8,6 +8,7 @@ function* loginSaga(action) {
   try {
     yield put(fetchRequest());
     const data = yield call(Api.login, action.payload);
+
     yield put(fetchSuccess(data));
   } catch (error) {
     yield put(fetchFail({ error: error.message }))
@@ -19,4 +20,29 @@ function* loginSaga(action) {
 
 export default function* () {
   yield takeLatest(LOGIN, loginSaga);
+};
+
+const takeEvery1 = (pattern, saga, ...args) => {
+  return fork(function*() {
+    while(true) {
+      const action = yield take(pattern);
+      yield call(saga, ...args.concat(action));
+    }
+  })
+};
+
+const takeLatest1 = (pattern, saga, ...args) => {
+  return fork( function*() {
+    let lastTask;
+
+    while(true) {
+      const action = yield take(pattern);
+
+      if (lastTask) {
+        cancel(lastTask);
+      }
+
+      lastTask = yield fork(saga, ...args.concat(action));
+    }
+  });
 };
